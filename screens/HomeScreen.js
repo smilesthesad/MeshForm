@@ -17,7 +17,7 @@ export default class HomeScreen extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            teamNumber: 9999,
+            teamNumber: '',
             hatchRating: 0,
             cargoRating: 0,
             climbRating: 0,
@@ -28,7 +28,7 @@ export default class HomeScreen extends React.Component {
         this.hatchRef = React.createRef();
         this.cargoRef = React.createRef();
         this.climbRef = React.createRef();
-        this.commentRef= React.createRef();
+        this.commentRef = React.createRef();
     }
 
     handleCommentsChange(e) {
@@ -41,14 +41,21 @@ export default class HomeScreen extends React.Component {
     handleTeamNumberChange(e) {
         console.log("setting to "+parseInt(e.nativeEvent.text))
         this.setState({
-            teamNumber: parseInt(e.nativeEvent.text),
+            teamNumber: e.nativeEvent.text,
         })
     }
     
     handleSubmit() {
-        // will implement clearing if we have time lmao
-        console.log("submitting");
-        console.log(this.state)
+        var sendThis = this.state; // SEND THIS TO OTHER CLIENTS
+        console.log(sendThis)
+
+        this.setState({
+            comment: '',
+            teamNumber: '',
+            hatchRating: 0,
+            cargoRating: 0,
+            climbRating: 0,
+        })
     }
 
     render() {
@@ -88,6 +95,7 @@ export default class HomeScreen extends React.Component {
                             console.log("setting hatchRating to "+val)
                         }}
                         ref={component => this._cargoRef = component}
+                        value={this.state.hatchRating}
                     />
 
                     <Text> Climb rating: {this.state.climbRating} </Text>
@@ -102,6 +110,7 @@ export default class HomeScreen extends React.Component {
                             })
                             console.log("setting climbsRating to "+val)
                         }}
+                        value={this.state.climbRating}
                     />
 
                     <Text> Cargo rating: {this.state.cargoRating} </Text>
@@ -117,6 +126,7 @@ export default class HomeScreen extends React.Component {
                             console.log("setting cargoRating to "+val)
                             console.log()
                         }}
+                        value={this.state.cargoRating}
                     />
 
                     <Input
@@ -125,6 +135,7 @@ export default class HomeScreen extends React.Component {
                             this.handleCommentsChange(val)
                         }
                     }
+                    value={this.state.comment}
                     />
 
 <Text> </Text>
@@ -137,6 +148,7 @@ export default class HomeScreen extends React.Component {
                             this.handleTeamNumberChange(val)
                         }
                     }
+                    value={this.state.teamNumber}
                     />
 
 <Text> </Text>
