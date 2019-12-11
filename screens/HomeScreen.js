@@ -17,6 +17,7 @@ export default class HomeScreen extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            teamNumber: 9999,
             hatchRating: 0,
             cargoRating: 0,
             climbRating: 0,
@@ -25,10 +26,17 @@ export default class HomeScreen extends React.Component {
         }
     }
 
-    handleTextChange(e) {
+    handleCommentsChange(e) {
         console.log('comment is '+e.nativeEvent.text);
         this.setState({
             comment: e.nativeEvent.text
+        })
+    }
+
+    handleTeamNumberChange(e) {
+        console.log("setting to "+parseInt(e.nativeEvent.text))
+        this.setState({
+            teamNumber: parseInt(e.nativeEvent.text),
         })
     }
 
@@ -50,7 +58,12 @@ export default class HomeScreen extends React.Component {
                 
                 </View>
                 
+               
+
+
                 <View style={{ flex: 1, alignItems: 'stretch', justifyContent: 'center', padding:25}}>
+        
+                    
                     <Text> Hatch rating: {this.state.hatchRating} </Text>
                     <Slider
                         value={0}
@@ -97,7 +110,16 @@ export default class HomeScreen extends React.Component {
                     <Input
                     placeholder='Comments...'
                     onChange = {(val) => {
-                            this.handleTextChange(val)
+                            this.handleCommentsChange(val)
+                        }
+                    }
+                    />
+
+                    <Input
+                    placeholder='Team Number'
+                    keyboardType='numeric'
+                    onChange = {(val) => {
+                            this.handleTeamNumberChange(val)
                         }
                     }
                     />
