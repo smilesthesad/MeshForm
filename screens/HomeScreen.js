@@ -21,7 +21,15 @@ export default class HomeScreen extends React.Component {
             cargoRating: 0,
             climbRating: 0,
             comment: '',
+            inpRef: React.createRef(),
         }
+    }
+
+    handleTextChange(e) {
+        console.log('comment is '+e.nativeEvent.text);
+        this.setState({
+            comment: e.nativeEvent.text
+        })
     }
 
     render() {
@@ -82,13 +90,15 @@ export default class HomeScreen extends React.Component {
                                 cargoRating: val
                             })
                             console.log("setting cargoRating to "+val)
+                            console.log()
                         }}
                     />
 
                     <Input
                     placeholder='Comments...'
-                    onChange={
-                        console.log("HI")
+                    onChange = {(val) => {
+                            this.handleTextChange(val)
+                        }
                     }
                     />
                 </View>
