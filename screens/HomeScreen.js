@@ -48,6 +48,7 @@ export default class HomeScreen extends React.Component {
     handleSubmit() {
         // will implement clearing if we have time lmao
         console.log("submitting");
+        console.log(this.state)
     }
 
     render() {
@@ -126,6 +127,9 @@ export default class HomeScreen extends React.Component {
                     }
                     />
 
+<Text> </Text>
+
+
                     <Input
                     placeholder='Team Number'
                     keyboardType='numeric'
@@ -134,6 +138,9 @@ export default class HomeScreen extends React.Component {
                         }
                     }
                     />
+
+<Text> </Text>
+
 
 
                     <Button
