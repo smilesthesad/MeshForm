@@ -11,62 +11,87 @@ import {
 } from 'react-native';
 
 import { MonoText } from '../components/StyledText';
+import { Slider } from 'react-native-elements'
 
-export default function HomeScreen() {
-  return (
-    <View style={styles.container}>
-      <ScrollView
-        style={styles.container}
-        contentContainerStyle={styles.contentContainer}>
-        <View style={styles.welcomeContainer}>
-          <Image
-            source={
-              __DEV__
-                ? require('../assets/images/robot-dev.png')
-                : require('../assets/images/robot-prod.png')
-            }
-            style={styles.welcomeImage}
-          />
-        </View>
+export default class HomeScreen extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            hatchRating: 0,
+            cargoRating: 0,
+            climbRating: 0,
+            comment: '',
+        }
+    }
 
-        <View style={styles.getStartedContainer}>
-          <DevelopmentModeNotice />
+    render() {
+        return (
+            <View style={styles.container}>
+            <ScrollView
+                style={styles.container}
+                contentContainerStyle={styles.contentContainer}>
+                <View style={styles.welcomeContainer}>
+                <Image
+                    source={
+                    __DEV__
+                        ? require('../assets/images/robot-dev.png')
+                        : require('../assets/images/robot-prod.png')
+                    }
+                    style={styles.welcomeImage}
+                />
+                
+                </View>
+                
+                <View style={{ flex: 1, alignItems: 'stretch', justifyContent: 'center', padding:25}}>
+                    <Text> Hatch rating: {this.state.hatchRating} </Text>
+                    <Slider
+                        value={0}
+                        step={1}
+                        minimumValue={0}
+                        maximumValue={10}
+                        onValueChange={(val) =>  {
+                            this.setState({
+                                hatchRating: val
+                            })
+                            console.log("setting hatchRating to "+val)
+                        }}
+                    />
 
-          <Text style={styles.getStartedText}>Get started by opening</Text>
+                    <Text> Climb rating: {this.state.climbRating} </Text>
+                    <Slider
+                        value={0}
+                        step={1}
+                        minimumValue={0}
+                        maximumValue={10}
+                        onValueChange={(val) =>  {
+                            this.setState({
+                                climbRating: val
+                            })
+                            console.log("setting climbsRating to "+val)
+                        }}
+                    />
 
-          <View
-            style={[styles.codeHighlightContainer, styles.homeScreenFilename]}>
-            <MonoText>screens/HomeScreen.js</MonoText>
-          </View>
-
-          <Text style={styles.getStartedText}>
-            Pee pee poopoo rem best girl I love victor.
-          </Text>
-        </View>
-
-        <View style={styles.helpContainer}>
-          <TouchableOpacity onPress={handleHelpPress} style={styles.helpLink}>
-            <Text style={styles.helpLinkText}>
-              Help, it didn’t automatically reload!
-            </Text>
-          </TouchableOpacity>
-        </View>
-      </ScrollView>
-
-      <View style={styles.tabBarInfoContainer}>
-        <Text style={styles.tabBarInfoText}>
-          This is a tab bar. You can edit it in:
-        </Text>
-
-        <View
-          style={[styles.codeHighlightContainer, styles.navigationFilename]}>
-          <MonoText style={styles.codeHighlightText}>
-            navigation/MainTabNavigator.js
-          </MonoText>
-        </View>
-      </View>
-    </View>
-  );
+                    <Text> Cargo rating: {this.state.cargoRating} </Text>
+                    <Slider
+                        value={0}
+                        step={1}
+                        minimumValue={0}
+                        maximumValue={10}
+                        onValueChange={(val) =>  {
+                            this.setState({
+                                cargoRating: val
+                            })
+                            console.log("setting cargoRating to "+val)
+                        }}
+                    />
+                </View>
+            
+               
+        
+            </ScrollView>
+            </View>
+        );
+    }
 }
 
 HomeScreen.navigationOptions = {
