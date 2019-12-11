@@ -11,7 +11,7 @@ import {
 } from 'react-native';
 
 import { MonoText } from '../components/StyledText';
-import { Slider, Input } from 'react-native-elements'
+import { Slider, Input, Button } from 'react-native-elements'
 
 export default class HomeScreen extends React.Component {
     constructor(props) {
@@ -22,8 +22,13 @@ export default class HomeScreen extends React.Component {
             cargoRating: 0,
             climbRating: 0,
             comment: '',
-            inpRef: React.createRef(),
         }
+
+        this.teamNumRef = React.createRef()
+        this.hatchRef = React.createRef();
+        this.cargoRef = React.createRef();
+        this.climbRef = React.createRef();
+        this.commentRef= React.createRef();
     }
 
     handleCommentsChange(e) {
@@ -38,6 +43,11 @@ export default class HomeScreen extends React.Component {
         this.setState({
             teamNumber: parseInt(e.nativeEvent.text),
         })
+    }
+    
+    handleSubmit() {
+        // will implement clearing if we have time lmao
+        console.log("submitting");
     }
 
     render() {
@@ -76,6 +86,7 @@ export default class HomeScreen extends React.Component {
                             })
                             console.log("setting hatchRating to "+val)
                         }}
+                        ref={component => this._cargoRef = component}
                     />
 
                     <Text> Climb rating: {this.state.climbRating} </Text>
@@ -122,6 +133,12 @@ export default class HomeScreen extends React.Component {
                             this.handleTeamNumberChange(val)
                         }
                     }
+                    />
+
+
+                    <Button
+                    title="Submit"
+                    onPress={() => this.handleSubmit()}
                     />
                 </View>
             </ScrollView>
