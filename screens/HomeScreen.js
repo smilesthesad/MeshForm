@@ -11,7 +11,7 @@ import {
 } from 'react-native';
 
 import { MonoText } from '../components/StyledText';
-import { Slider } from 'react-native-elements'
+import { Slider, Input } from 'react-native-elements'
 
 export default class HomeScreen extends React.Component {
     constructor(props) {
@@ -84,10 +84,14 @@ export default class HomeScreen extends React.Component {
                             console.log("setting cargoRating to "+val)
                         }}
                     />
+
+                    <Input
+                    placeholder='Comments...'
+                    onChange={
+                        console.log("HI")
+                    }
+                    />
                 </View>
-            
-               
-        
             </ScrollView>
             </View>
         );
