@@ -7,6 +7,8 @@ import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
 import LinksScreen from '../screens/LinksScreen';
 import SettingsScreen from '../screens/SettingsScreen';
+import QRReader from '../screens/QRReader';
+
 
 const config = Platform.select({
   web: { headerMode: 'screen' },
@@ -68,9 +70,26 @@ SettingsStack.navigationOptions = {
 
 SettingsStack.path = '';
 
+const QRStack = createStackNavigator(
+    {
+      Settings: QRReader,
+    },
+    config
+  );
+  
+  QRStack.navigationOptions = {
+    tabBarLabel: 'QR Scan',
+    tabBarIcon: ({ focused }) => (
+      <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-options' : 'md-options'} />
+    ),
+  };
+  
+  QRStack.path = '';
+
 const tabNavigator = createBottomTabNavigator({
   HomeStack,
   LinksStack,
+  QRStack,
   SettingsStack,
 });
 
