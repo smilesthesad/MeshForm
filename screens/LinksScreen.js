@@ -1,5 +1,5 @@
 import React from 'react';
-import { ScrollView, StyleSheet } from 'react-native';
+import { ScrollView, StyleSheet, Button } from 'react-native';
 import { Card, Slider, Input, Text } from 'react-native-elements'
 import { ExpoLinksView } from '@expo/samples';
 
@@ -12,9 +12,9 @@ export default class LinksScreen extends React.Component {
                 {
                 "cargoRating": 0,
                 "climbRating": 23,
-                "comment": "aaa",
-                "hatchRating": 0,
-                "teamNumber": 9939,
+                "comment\\": "aaa",
+                "hatchRating\\": 0,
+                "teamNumber\\": 9939,
               },
               {
                 "cargoRating": 123,
@@ -34,22 +34,60 @@ export default class LinksScreen extends React.Component {
         }
     }
 
+    // componentDidMount() {
+    //   this.props.navigation.getParam('asdf').registerListener(function(val) {
+    //     this.setState({
+    //       teams: [...this.state.teams, val]
+    //     })
+    //   })
+    // }
 
+    /* getContent ()  {
+      console.log("pressed button")
+      const info = this.props.navigation.getParam('asdf');
+      console.log(info)
+      console.log("info is "+info)
+      this.setState({
+            teams: [...this.state.teams, info]
+          })
+    } */
     render() {
+      // var temp = this.state.teams[this.state.teams.length-1];
+      // const info = this.props.navigation.getParam('asdf');
+      // if(info !== temp) {
+      //   this.setState({
+      //     teams: [...this.state.teams, info]
+      //   })
+      //   temp = info
+      //   console.log("appending "+info + " to this.state")
+      // }
+      const info = this.props.navigation.getParam('asdf');
+      console.log(this.props)
+      //console.log("hello")
+      console.log("info" + info)
+      var array = this.state.teams;
+      array.push(info);
+      console.log(array)
+      
+      //console.log("array"+array)
+      
+
+      // console.log("asdfasdf" + info)
         return (
             <ScrollView style={styles.container}>
                 {   
-                    this.state.teams.map((shit) => {
+                    array.map((shit) => {
+                        var shit2 = shit
                         var k = Math.random();
                         return(
                         <Card key={k}>
-                            <Text style={{fontWeight: 'bold'}}> Team #{shit.teamNumber} </Text>
-                            <Text> Cargo rating: {shit.cargoRating} </Text>
-                            <Text> Climb rating: {shit.climbRating} </Text>
-                            <Text> Hatch rating: {shit.hatchRating} </Text>
+                            <Text style={{fontWeight: 'bold'}}> Team #{shit2.teamNumber} </Text>
+                            <Text> Cargo rating: {shit2.cargoRating} </Text>
+                            <Text> Climb rating: {shit2.climbRating} </Text>
+                            <Text> Hatch rating: {shit2.hatchRating} </Text>
                             <Text> </Text>
 
-                            <Text> {shit.comment} </Text>
+                            <Text> {shit2.comment} </Text>
 
 
 
@@ -60,6 +98,10 @@ export default class LinksScreen extends React.Component {
                         
                     })
                 }
+
+                <Button title="sync" onPress={this.getContent}>
+
+                </Button>
             </ScrollView>
           );
     }

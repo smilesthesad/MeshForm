@@ -1,5 +1,6 @@
 import * as WebBrowser from 'expo-web-browser';
 import React from 'react';
+import QRCode from 'react-native-qrcode-svg';
 import {
   Image,
   Platform,
@@ -8,6 +9,7 @@ import {
   Text,
   TouchableOpacity,
   View,
+  Share
 } from 'react-native';
 
 import { MonoText } from '../components/StyledText';
@@ -22,6 +24,8 @@ export default class HomeScreen extends React.Component {
             cargoRating: 0,
             climbRating: 0,
             comment: '',
+            value: ' ',
+            qrExist: false
         }
 
         this.teamNumRef = React.createRef()
@@ -47,6 +51,7 @@ export default class HomeScreen extends React.Component {
     
     handleSubmit() {
         var sendThis = this.state; // SEND THIS TO OTHER CLIENTS
+        
         console.log(sendThis)
 
         this.setState({
@@ -55,10 +60,17 @@ export default class HomeScreen extends React.Component {
             hatchRating: 0,
             cargoRating: 0,
             climbRating: 0,
+            value: JSON.stringify(sendThis),
+            qrExist: true
         })
     }
 
     render() {
+        const qrCode = <QRCode value={this.state.value}
+        logoSize={90}
+        BackgroundColor='transparent'
+        style={styles.qrContainer}/>
+        const noqrCode = <Text></Text>
         return (
             <View style={styles.container}>
             <ScrollView
@@ -150,13 +162,18 @@ export default class HomeScreen extends React.Component {
                     }
                     value={this.state.teamNumber}
                     />
+<Text> </Text>    
+                    <View style={styles.qrContainer}>
+                    {this.state.qrExist ? qrCode:noqrCode}
+                    </View>
+                    
 
 <Text> </Text>
-
+                    
 
 
                     <Button
-                    title="Submit"
+                    title="Create QR"
                     onPress={() => this.handleSubmit()}
                     />
                 </View>
@@ -209,6 +226,12 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
+  },
+  qrContainer:{
+    flex: 1, 
+    alignItems: 'center', 
+    justifyContent: 'center', 
+    paddingBottom: 5,
   },
   developmentModeText: {
     marginBottom: 20,
@@ -291,5 +314,5 @@ const styles = StyleSheet.create({
   helpLinkText: {
     fontSize: 14,
     color: '#2e78b7',
-  },
+  }
 });

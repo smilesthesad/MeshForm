@@ -21,6 +21,16 @@ export default class QRReader extends React.Component {
     const { status } = await Permissions.askAsync(Permissions.CAMERA);
     this.setState({ hasCameraPermission: status === 'granted' });
   }
+  handleBarCodeScanned = ({ type, data }) => {
+    this.setState({ scanned: true });
+    console.log(`Bar code with type ${type} and data ${data} has been scanned!`)
+    alert(`Bar code with type ${type} and data ${data} has been scanned!`);
+    // Clipboard.setString(data);
+    this.props.navigation.navigate('Links', {
+      asdf: data
+    })
+    //console.log(this.props)
+  };
 
   render() {
     const { hasCameraPermission, scanned } = this.state;
@@ -31,6 +41,7 @@ export default class QRReader extends React.Component {
     if (hasCameraPermission === false) {
       return <Text>No access to camera</Text>;
     }
+    const {navigate} = this.props.navigation;
     return (
       <View
         style={{
@@ -53,9 +64,13 @@ export default class QRReader extends React.Component {
     );
   }
 
-  handleBarCodeScanned = ({ type, data }) => {
+  /* handleBarCodeScanned = ({ type, data }) => {
     this.setState({ scanned: true });
     console.log(`Bar code with type ${type} and data ${data} has been scanned!`)
     alert(`Bar code with type ${type} and data ${data} has been scanned!`);
-  };
+    this.props.navigation.navigate('LinksStack', {
+      asdf: 'asdf'
+    })
+    console.log(this.props)
+  }; */
 }
