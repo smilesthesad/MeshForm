@@ -23,8 +23,8 @@ export default class QRReader extends React.Component {
   }
   handleBarCodeScanned = ({ type, data }) => {
     this.setState({ scanned: true });
-    console.log(`Bar code with type ${type} and data ${data} has been scanned!`)
-    alert(`Bar code with type ${type} and data ${data} has been scanned!`);
+    //console.log(`Bar code with type ${type} and data ${data} has been scanned!`)
+    //alert(`Bar code with type ${type} and data ${data} has been scanned!`);
     // Clipboard.setString(data);
     this.props.navigation.navigate('Links', {
       asdf: data

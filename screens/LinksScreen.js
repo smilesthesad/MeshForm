@@ -12,9 +12,9 @@ export default class LinksScreen extends React.Component {
                 {
                 "cargoRating": 0,
                 "climbRating": 23,
-                "comment\\": "aaa",
-                "hatchRating\\": 0,
-                "teamNumber\\": 9939,
+                "comment": "aaa",
+                "hatchRating": 0,
+                "teamNumber": 9939,
               },
               {
                 "cargoRating": 123,
@@ -61,13 +61,13 @@ export default class LinksScreen extends React.Component {
       //   temp = info
       //   console.log("appending "+info + " to this.state")
       // }
-      const info = this.props.navigation.getParam('asdf');
-      console.log(this.props)
+      const info = this.props.navigation.state.params.asdf;
+      //console.log(this.props.navigation.state.params.asdf);
       //console.log("hello")
-      console.log("info" + info)
+      //console.log("info" + info)
       var array = this.state.teams;
-      array.push(info);
-      console.log(array)
+      array.push(JSON.parse(info));
+      //console.log(array);
       
       //console.log("array"+array)
       
