@@ -62,11 +62,16 @@ export default class LinksScreen extends React.Component {
       //   console.log("appending "+info + " to this.state")
       // }
       const info = this.props.navigation.state.params.asdf;
+      if (info == undefined){
+        var array = this.state.teams;
+      } else {
+        var array = this.state.teams;
+        array.push(JSON.parse(info));
+      }
       //console.log(this.props.navigation.state.params.asdf);
       //console.log("hello")
       //console.log("info" + info)
-      var array = this.state.teams;
-      array.push(JSON.parse(info));
+      
       //console.log(array);
       
       //console.log("array"+array)
@@ -76,18 +81,18 @@ export default class LinksScreen extends React.Component {
         return (
             <ScrollView style={styles.container}>
                 {   
-                    array.map((shit) => {
-                        var shit2 = shit
+                    array.map((thing) => {
+                        var thing2 = thing
                         var k = Math.random();
                         return(
                         <Card key={k}>
-                            <Text style={{fontWeight: 'bold'}}> Team #{shit2.teamNumber} </Text>
-                            <Text> Cargo rating: {shit2.cargoRating} </Text>
-                            <Text> Climb rating: {shit2.climbRating} </Text>
-                            <Text> Hatch rating: {shit2.hatchRating} </Text>
+                            <Text style={{fontWeight: 'bold'}}> Team #{thing2.teamNumber} </Text>
+                            <Text> Cargo rating: {thing2.cargoRating} </Text>
+                            <Text> Climb rating: {thing2.climbRating} </Text>
+                            <Text> Hatch rating: {thing2.hatchRating} </Text>
                             <Text> </Text>
 
-                            <Text> {shit2.comment} </Text>
+                            <Text> {thing2.comment} </Text>
 
 
 
