@@ -9,8 +9,9 @@ import {
   Text,
   TouchableOpacity,
   View,
-  Share
+  Share,
 } from 'react-native';
+import { CheckBox } from 'react-native-elements';
 
 import { MonoText } from '../components/StyledText';
 import { Slider, Input, Button } from 'react-native-elements'
@@ -19,50 +20,169 @@ export default class HomeScreen extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            teamNumber: '',
-            hatchRating: 0,
-            cargoRating: 0,
-            climbRating: 0,
-            comment: '',
-            value: ' ',
+            gameLocation: '',
+            teamNo: 0,
+            scouter: '',
+            matchNo: 0,
+            startingPosition: '',
+            crossLine: '',
+            crossChecked: false,
+            sandLowGoal: 0,
+            sandOutGoal: 0,
+            sandInGoal: 0,
+            teleopLowGoal: 0,
+            teleopOutGoal: 0,
+            teleopInGoal: 0,
+            cpLevelOne: '',
+            cpLevelTwo: '',
+            cpOneChecked: false,
+            cpTwoChecked: false,
+            inRendezVous: '',
+            inRendezVousCheck: false,
+            climb: '',
+            climbCheck: false,
+            balanced: '',
+            balancedCheck: false,
+            withBuddy: '',
+            withBuddyCheck: false,
+            comments: '',
+            value: '',
             qrExist: false
         }
 
-        this.teamNumRef = React.createRef()
-        this.hatchRef = React.createRef();
-        this.cargoRef = React.createRef();
+        this.gameLocationRef = React.createRef()
+        this.teamNoRef = React.createRef();
+        this.scouterRef = React.createRef();
+        this.matchNoRef = React.createRef();
+        this.allianceColorRef = React.createRef();
+        this.startingPositionRef = React.createRef()
+        this.crossLineRef = React.createRef();
+        this.sandLowGoalRef = React.createRef();
+        this.sandOutGoalRef = React.createRef();
+        this.sandInGoalRef = React.createRef();
+        this.teleopLowGoalRef = React.createRef()
+        this.teleopOutGoalRef = React.createRef();
+        this.teleopInGoalRef = React.createRef();
+        this.cpLevelOneRef = React.createRef();
+        this.cpLevelTwoRef = React.createRef();
+        this.inRendezVousRef = React.createRef()
         this.climbRef = React.createRef();
-        this.commentRef = React.createRef();
+        this.balancedRef = React.createRef();
+        this.withBuddyRef = React.createRef();
+        this.commentsRef = React.createRef();
     }
 
     handleCommentsChange(e) {
-        console.log('comment is '+e.nativeEvent.text);
+        //console.log('comment is '+e.nativeEvent.text);
         this.setState({
-            comment: e.nativeEvent.text
+            comments: e.nativeEvent.text
+        })
+    }
+
+    handleScouterChange(e) {
+      //console.log('comment is '+e.nativeEvent.text);
+      this.setState({
+          scouter: e.nativeEvent.text
+      })
+  }
+
+  handleGameLocationChange(e) {
+    //console.log('comment is '+e.nativeEvent.text);
+    this.setState({
+        gameLocation: e.nativeEvent.text
+    })
+}
+
+    handleTeamNumberChange(e) {
+        //console.log("setting to "+parseInt(e.nativeEvent.text))
+        this.setState({
+          teamNo: e.nativeEvent.text,
         })
     }
 
     handleTeamNumberChange(e) {
-        console.log("setting to "+parseInt(e.nativeEvent.text))
-        this.setState({
-            teamNumber: e.nativeEvent.text,
-        })
+      //console.log("setting to "+parseInt(e.nativeEvent.text))
+      this.setState({
+        teamNo: e.nativeEvent.text,
+      })
     }
+
+    handleStartingPositionChange(e) {
+      //console.log("setting to "+parseInt(e.nativeEvent.text))
+      this.setState({
+        startingPosition: e.nativeEvent.text,
+      })
+    }
+
+    handleMatchNumberChange(e) {
+      //console.log("setting to "+parseInt(e.nativeEvent.text))
+      this.setState({
+        matchNo: e.nativeEvent.text,
+      })
+  }
     
     handleSubmit() {
-        var sendThis = this.state; // SEND THIS TO OTHER CLIENTS
+        var sendThis = {
+          gameLocation: this.state.gameLocation,
+          teamNo: this.state.teamNo,
+          scouter: this.state.scouter,
+          matchNo: this.state.matchNo,
+          startingPosition: this.state.startingPosition,
+          crossLine: this.state.crossLine,
+          sandLowGoal: this.state.sandLowGoal,
+          sandOutGoal: this.state.sandOutGoal,
+          sandInGoal: this.state.sandInGoal,
+          teleopLowGoal: this.state.teleopLowGoal,
+          teleopOutGoal: this.state.teleopOutGoal,
+          teleopInGoal: this.state.teleopInGoal,
+          cpLevelOne: this.state.cpLevelOne,
+          cpLevelTwo: this.state.cpLevelTwo,
+          inRendezVous: this.state.inRendezVous,
+          climb: this.state.climb,
+          balanced: this.state.balanced,
+          withBuddy: this.state.withBuddy,
+          comments: this.state.comments
+        }; // SEND THIS TO OTHER CLIENTS
         
-        console.log(sendThis)
+        //console.log(sendThis)
 
         this.setState({
-            comment: '',
-            teamNumber: '',
-            hatchRating: 0,
-            cargoRating: 0,
-            climbRating: 0,
             value: JSON.stringify(sendThis),
             qrExist: true
         })
+    }
+
+    clear(){
+      this.setState({
+        gameLocation: '',
+            teamNo: 0,
+            scouter: '',
+            matchNo: 0,
+            startingPosition: '',
+            crossLine: '',
+            crossChecked: false,
+            sandLowGoal: 0,
+            sandOutGoal: 0,
+            sandInGoal: 0,
+            teleopLowGoal: 0,
+            teleopOutGoal: 0,
+            teleopInGoal: 0,
+            cpLevelOne: '',
+            cpLevelTwo: '',
+            cpOneChecked: false,
+            cpTwoChecked: false,
+            inRendezVous: '',
+            inRendezVousCheck: false,
+            balanced: '',
+            balancedCheck: false,
+            climb: '',
+            climbCheck: false,
+            withBuddy: '',
+            withBuddyCheck: false,
+            comments: '',
+            value: '',
+            qrExist: false
+      })
     }
 
     render() {
@@ -92,66 +212,31 @@ export default class HomeScreen extends React.Component {
 
 
                 <View style={{ flex: 1, alignItems: 'stretch', justifyContent: 'center', padding:25}}>
-        
-                    
-                    <Text> Hatch rating: {this.state.hatchRating} </Text>
-                    <Slider
-                        value={0}
-                        step={1}
-                        minimumValue={0}
-                        maximumValue={10}
-                        onValueChange={(val) =>  {
-                            this.setState({
-                                hatchRating: val
-                            })
-                            console.log("setting hatchRating to "+val)
-                        }}
-                        ref={component => this._cargoRef = component}
-                        value={this.state.hatchRating}
-                    />
-
-                    <Text> Climb rating: {this.state.climbRating} </Text>
-                    <Slider
-                        value={0}
-                        step={1}
-                        minimumValue={0}
-                        maximumValue={10}
-                        onValueChange={(val) =>  {
-                            this.setState({
-                                climbRating: val
-                            })
-                            console.log("setting climbsRating to "+val)
-                        }}
-                        value={this.state.climbRating}
-                    />
-
-                    <Text> Cargo rating: {this.state.cargoRating} </Text>
-                    <Slider
-                        value={0}
-                        step={1}
-                        minimumValue={0}
-                        maximumValue={10}
-                        onValueChange={(val) =>  {
-                            this.setState({
-                                cargoRating: val
-                            })
-                            console.log("setting cargoRating to "+val)
-                            console.log()
-                        }}
-                        value={this.state.cargoRating}
-                    />
+                    <Text style={styles.titleText}> Basic Information</Text>
 
                     <Input
-                    placeholder='Comments...'
+                    placeholder='Scouter'
                     onChange = {(val) => {
-                            this.handleCommentsChange(val)
+                            this.handleScouterChange(val)
                         }
                     }
-                    value={this.state.comment}
+                    value={this.state.scouter}
                     />
 
 <Text> </Text>
 
+                    <Input
+                    placeholder='Game Location'
+                    onChange = {(val) => {
+                            this.handleGameLocationChange(val)
+                        }
+                    }
+                    value={this.state.gameLocation}
+                    />
+
+<Text> </Text>
+
+                    
 
                     <Input
                     placeholder='Team Number'
@@ -160,9 +245,268 @@ export default class HomeScreen extends React.Component {
                             this.handleTeamNumberChange(val)
                         }
                     }
-                    value={this.state.teamNumber}
+                    value={this.state.teamNo}
                     />
-<Text> </Text>    
+                    <Text> </Text>    
+
+                    <Input
+                    placeholder='Match Number'
+                    keyboardType='numeric'
+                    onChange = {(val) => {
+                            this.handleMatchNumberChange(val)
+                        }
+                    }
+                    value={this.state.matchNo}
+                    />
+                    <Text></Text>
+                    <Input
+                    placeholder='Starting Position'
+                    onChange = {(val) => {
+                            this.handleStartingPositionChange(val)
+                        }
+                    }
+                    value={this.state.startingPosition}
+                    />
+                    
+                    <Text></Text>
+                    <Text  style={styles.titleText}> Sandstorm Period</Text>
+                      <CheckBox
+                      title = "Crossed Line?"
+                      onPress={() => {
+                        if(this.state.crossLine=="y"){
+                          this.setState({
+                            crossLine: "n",
+                            crossChecked: false
+                          })
+                        }else{
+                          this.setState({
+                            crossLine: "y",
+                            crossChecked: true
+                          })
+                        }
+                      }}
+                      checkedIcon="dot-circle-o"
+                      uncheckedIcon="circle-o"
+                      checkedColor="red"
+                      checked={this.state.crossChecked}></CheckBox>
+
+                    <Text> Low Goal: {this.state.sandLowGoal} </Text>
+                    <Slider
+                        value={0}
+                        step={1}
+                        minimumValue={0}
+                        maximumValue={15}
+                        onValueChange={(val) =>  {
+                            this.setState({
+                              sandLowGoal: val
+                            })
+                            //console.log("setting hatchRating to "+val)
+                        }}
+                        ref={component => this._cargoRef = component}
+                        value={this.state.sandLowGoal}
+                    />
+                    <Text> High Goal: {this.state.sandOutGoal} </Text>
+                    <Slider
+                        value={0}
+                        step={1}
+                        minimumValue={0}
+                        maximumValue={15}
+                        onValueChange={(val) =>  {
+                            this.setState({
+                              sandOutGoal: val
+                            })
+                        }}
+                        ref={component => this._cargoRef = component}
+                        value={this.state.sandOutGoal}
+                    />
+                    <Text> Inner Goal: {this.state.sandInGoal} </Text>
+                    <Slider
+                        value={0}
+                        step={1}
+                        minimumValue={0}
+                        maximumValue={15}
+                        onValueChange={(val) =>  {
+                            this.setState({
+                              sandInGoal: val
+                            })
+                        }}
+                        ref={component => this._cargoRef = component}
+                        value={this.state.sandInGoal}
+                    />
+                    <Text></Text>
+                    <Text  style={styles.titleText}>Teleoperated Period</Text>
+                    <Text></Text>
+                    <Text> Low Goal: {this.state.teleopLowGoal} </Text>
+                    <Slider
+                        value={0}
+                        step={1}
+                        minimumValue={0}
+                        maximumValue={30}
+                        onValueChange={(val) =>  {
+                            this.setState({
+                              teleopLowGoal: val
+                            })
+                        }}
+                        ref={component => this._cargoRef = component}
+                        value={this.state.teleopLowGoal}
+                    />
+                    <Text> High Goal: {this.state.teleopOutGoal} </Text>
+                    <Slider
+                        value={0}
+                        step={1}
+                        minimumValue={0}
+                        maximumValue={30}
+                        onValueChange={(val) =>  {
+                            this.setState({
+                              teleopOutGoal: val
+                            })
+                        }}
+                        ref={component => this._cargoRef = component}
+                        value={this.state.teleopOutGoal}
+                    />
+                    <Text> Inner Goal: {this.state.teleopInGoal} </Text>
+                    <Slider
+                        value={0}
+                        step={1}
+                        minimumValue={0}
+                        maximumValue={30}
+                        onValueChange={(val) =>  {
+                            this.setState({
+                              teleopInGoal: val
+                            })
+                        }}
+                        ref={component => this._cargoRef = component}
+                        value={this.state.teleopInGoal}
+                    />
+                      <CheckBox
+                      title = "Control Panel Level 1"
+                      onPress={() => {
+                        if(this.state.cpLevelOne=="y"){
+                          this.setState({
+                            cpLevelOne: "n",
+                            cpOneChecked:false
+                          })
+                        }else{
+                          this.setState({
+                            cpLevelOne: "y",
+                            cpOneChecked:true
+                          })
+                        }
+                      }}
+                      checkedIcon="dot-circle-o"
+                      uncheckedIcon="circle-o"
+                      checkedColor="red"
+                      checked={this.state.cpOneChecked}></CheckBox>
+                      <CheckBox
+                      title = "Control Panel Level 2"
+                      onPress={() => {
+                        if(this.state.cpLevelTwo=="y"){
+                          this.setState({
+                            cpLevelTwo: "n",
+                            cpTwoChecked:false
+                          })
+                        }else{
+                          this.setState({
+                            cpLevelTwo: "y",
+                            cpTwoChecked:true
+                          })
+                        }
+                      }}
+                      checkedIcon="dot-circle-o"
+                      uncheckedIcon="circle-o"
+                      checkedColor="red"
+                      checked={this.state.cpTwoChecked}></CheckBox> 
+                    <Text> </Text>  
+                    <CheckBox
+                      title = "In Rendez Vous?"
+                      onPress={() => {
+                        if(this.state.inRendezVous=="y"){
+                          this.setState({
+                            inRendezVous: "n",
+                            inRendezVousCheck:false
+                          })
+                        }else{
+                          this.setState({
+                            inRendezVous: "y",
+                            inRendezVousCheck:true
+                          })
+                        }
+                      }}
+                      checkedIcon="dot-circle-o"
+                      uncheckedIcon="circle-o"
+                      checkedColor="red"
+                      checked={this.state.inRendezVousCheck}></CheckBox> 
+                      <CheckBox
+                      title = "Successful Climb?"
+                      onPress={() => {
+                        if(this.state.climb=="y"){
+                          this.setState({
+                            climb: "n",
+                            climbCheck:false
+                          })
+                        }else{
+                          this.setState({
+                            climb: "y",
+                            climbCheck:true
+                          })
+                        }
+                      }}
+                      checkedIcon="dot-circle-o"
+                      uncheckedIcon="circle-o"
+                      checkedColor="red"
+                      checked={this.state.climbCheck}></CheckBox>
+                      <CheckBox
+                      title = "Balanced Climb?"
+                      onPress={() => {
+                        if(this.state.balanced=="y"){
+                          this.setState({
+                            balanced: "n",
+                            balancedCheck:false
+                          })
+                        }else{
+                          this.setState({
+                            balanced: "y",
+                            balancedCheck:true
+                          })
+                        }
+                      }}
+                      checkedIcon="dot-circle-o"
+                      uncheckedIcon="circle-o"
+                      checkedColor="red"
+                      checked={this.state.balancedCheck}></CheckBox> 
+                      <CheckBox
+                      title = "With Buddy?"
+                      onPress={() => {
+                        if(this.state.withBuddy=="y"){
+                          this.setState({
+                            withBuddy: "n",
+                            withBuddyCheck:false
+                          })
+                        }else{
+                          this.setState({
+                            withBuddy: "y",
+                            withBuddyCheck:true
+                          })
+                        }
+                      }}
+                      checkedIcon="dot-circle-o"
+                      uncheckedIcon="circle-o"
+                      checkedColor="red"
+                      checked={this.state.withBuddyCheck}></CheckBox> 
+                    <Text></Text>
+                    <Input
+                    placeholder='Comments...'
+                    onChange = {(val) => {
+                            this.handleCommentsChange(val)
+                        }
+                    }
+                    value={this.state.comments}
+                    />
+
+<Text> </Text>
+
+
+                    
                     <View style={styles.qrContainer}>
                     {this.state.qrExist ? qrCode:noqrCode}
                     </View>
@@ -175,6 +519,11 @@ export default class HomeScreen extends React.Component {
                     <Button
                     title="Create QR"
                     onPress={() => this.handleSubmit()}
+                    />
+                    <Text> </Text>
+                    <Button
+                    title="Clear"
+                    onPress={() => this.clear()}
                     />
                 </View>
             </ScrollView>
@@ -232,6 +581,10 @@ const styles = StyleSheet.create({
     alignItems: 'center', 
     justifyContent: 'center', 
     paddingBottom: 5,
+  },
+  titleText:{
+    fontSize: 20,
+    fontWeight: 'bold'
   },
   developmentModeText: {
     marginBottom: 20,

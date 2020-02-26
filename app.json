@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "MeshForm",
-    "slug": "FraserHacksProject",
+    "name": "2020 FRC4308 Scouting",
+    "slug": "20204308Scouting",
     "privacy": "public",
     "sdkVersion": "36.0.0",
     "platforms": [
@@ -24,7 +24,11 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.team4308.2020scouting"
     }
+  },
+  "android":{
+    "package": "com.team4308.2020scouting"
   }
 }
